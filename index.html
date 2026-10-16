@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>पर्सोना (नॉन) ग्राटा</title>
   
-  <!-- IBM Plex Sans & IBM Plex Sans Devanagari via Google Fonts -->
+  <!-- Fonts: Ubuntu for English Latin characters, IBM Plex Sans Devanagari & IBM Plex Sans for Marathi -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Devanagari:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=Ubuntu:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,7 +18,7 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
+            sans: ['"Ubuntu"', '"IBM Plex Sans Devanagari"', '"IBM Plex Sans"', 'sans-serif'],
           }
         }
       }
@@ -28,22 +28,14 @@
   <style>
     :root {
       --bg-color: #fcfbf9;
-      --card-bg: #ffffff;
       --text-main: #1f242d;
-      --text-muted: #5c6470;
-      --border-color: #e5e9f0;
-      --accent-color: #b91c1c;
       --control-bg: rgba(255, 255, 255, 0.85);
       --control-border: #e2e8f0;
     }
 
     .dark {
       --bg-color: #0f141c;
-      --card-bg: #161d28;
       --text-main: #e2e8f0;
-      --text-muted: #94a3b8;
-      --border-color: #273344;
-      --accent-color: #f87171;
       --control-bg: rgba(22, 29, 40, 0.85);
       --control-border: #334155;
     }
@@ -51,27 +43,46 @@
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
-      font-family: 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
+      font-family: 'Ubuntu', 'IBM Plex Sans Devanagari', 'IBM Plex Sans', sans-serif;
       transition: background-color 0.3s ease, color 0.3s ease;
       word-break: normal;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
+      overflow-wrap: normal;
+      word-wrap: normal;
       hyphens: none;
       -webkit-hyphens: none;
     }
 
-    /* Strict alignment rules */
+    /* Typography settings for main body */
+    .article-body {
+      font-size: 1.175rem;
+    }
+
+    @media (min-width: 768px) {
+      .article-body {
+        font-size: 1.25rem;
+      }
+    }
+
     .article-body p {
       text-align: justify;
       text-justify: inter-word;
+      line-height: 1.9;
+      margin-bottom: 1.35rem;
       hyphens: none;
       -webkit-hyphens: none;
       word-break: normal;
-      line-height: 1.95;
+      overflow-wrap: normal;
+    }
+
+    /* Headings ONLY: strictly non-bold (normal font-weight) */
+    .article-title {
+      font-weight: 400 !important;
     }
 
     .text-center-exact {
       text-align: center !important;
+      margin-bottom: 1.35rem;
+      line-height: 1.9;
     }
 
     /* Keyframe animations for the graphic */
@@ -120,10 +131,9 @@
 </head>
 <body class="min-h-screen py-6 sm:py-10 px-4 sm:px-6 md:px-8 antialiased selection:bg-rose-200 dark:selection:bg-rose-900 selection:text-current">
 
-  <div class="max-w-3xl mx-auto flex items-center justify-end gap-2.5 mb-6 sm:mb-8 sticky top-3 z-30">
-    <div class="flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md border shadow-sm transition-all" style="background-color: var(--control-bg); border-color: var(--control-border);">
-      
-      <!-- Theme Toggle Button -->
+  <!-- Top bar: Light/Dark theme toggle only -->
+  <div class="max-w-3xl mx-auto flex items-center justify-end mb-6 sticky top-3 z-30">
+    <div class="flex items-center px-1.5 py-1.5 rounded-full backdrop-blur-md border shadow-sm transition-all" style="background-color: var(--control-bg); border-color: var(--control-border);">
       <button 
         id="themeToggleBtn" 
         type="button" 
@@ -140,30 +150,21 @@
           <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
-
-      <span class="w-[1px] h-5 bg-slate-200 dark:bg-slate-700"></span>
-
-      <!-- Share Button -->
-      <button 
-        id="shareBtn" 
-        type="button" 
-        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium hover:bg-slate-200/60 dark:hover:bg-slate-700/60 transition-colors focus:outline-none"
-        aria-label="Share article"
-        title="शेअर करा">
-        <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 1 1 0-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 1 0 5.367-2.684 3 3 0 0 0-5.367 2.684zm0 9.316a3 3 0 1 0 5.368 2.684 3 3 0 0 0-5.368-2.684z"></path>
-        </svg>
-        <span class="text-xs font-semibold tracking-wide">शेअर</span>
-      </button>
-
     </div>
   </div>
 
   <main class="max-w-3xl mx-auto px-1 sm:px-4">
     
-    <!-- Title Section with Animated SVG Graphic -->
+    <!-- Title placed strictly ABOVE the SVG image, with no bold formatting -->
+    <div class="mb-6 text-center">
+      <h1 class="article-title text-2xl sm:text-3xl md:text-4xl tracking-tight text-slate-900 dark:text-white">
+        पर्सोना (नॉन) ग्राटा..
+      </h1>
+    </div>
+
+    <!-- Animated colorful SVG Graphic representing diplomacy, passports/stamps -->
     <div class="mb-8 flex flex-col items-center">
-      <div class="w-full max-w-lg mb-6 overflow-hidden rounded-2xl shadow-sm border p-2 sm:p-4 bg-gradient-to-b from-amber-50/70 via-rose-50/30 to-blue-50/40 dark:from-slate-800/80 dark:via-slate-850 dark:to-slate-900 border-slate-200/80 dark:border-slate-800">
+      <div class="w-full max-w-lg overflow-hidden rounded-2xl shadow-sm border p-2 sm:p-4 bg-gradient-to-b from-amber-50/70 via-rose-50/30 to-blue-50/40 dark:from-slate-800/80 dark:via-slate-850 dark:to-slate-900 border-slate-200/80 dark:border-slate-800">
         <svg class="w-full h-auto aspect-[5/3] select-none" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="shieldGrad" x1="150" y1="50" x2="350" y2="250" gradientUnits="userSpaceOnUse">
@@ -179,16 +180,12 @@
               <stop offset="0%" stop-color="#ef4444" />
               <stop offset="100%" stop-color="#991b1b" />
             </linearGradient>
-            <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="8" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
             <filter id="shadowFilter" x="-10%" y="-10%" width="120%" height="120%">
               <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15" />
             </filter>
           </defs>
 
-          <!-- Subtle Background Grid/Latitude Lines -->
+          <!-- Latitude/Longitude Orbit Lines -->
           <g class="orbit-lines" opacity="0.35">
             <ellipse cx="250" cy="150" rx="140" ry="140" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6 6" />
             <ellipse cx="250" cy="150" rx="140" ry="60" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4" />
@@ -204,77 +201,63 @@
             <path d="M250 65 L325 95 C325 155 285 205 250 225 C215 205 175 155 175 95 Z" 
                   fill="url(#shieldGrad)" fill-opacity="0.12" stroke="url(#shieldGrad)" stroke-width="3" stroke-linejoin="round" />
             
-            <!-- Inner Shield Gold Accent -->
+            <!-- Inner Shield Accent -->
             <path d="M250 78 L312 103 C312 150 279 191 250 208 C221 191 188 150 188 103 Z" 
                   fill="#ffffff" class="dark:fill-slate-800" fill-opacity="0.7" stroke="url(#goldGrad)" stroke-width="2" stroke-linejoin="round" />
 
             <!-- Olive Laurel Leaves (Diplomacy & Peace) -->
-            <!-- Left Branch -->
             <path d="M168 150 C165 125 174 100 190 85" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" fill="none" />
             <ellipse cx="170" cy="130" rx="7" ry="3.5" transform="rotate(-30 170 130)" fill="#34d399" />
             <ellipse cx="176" cy="108" rx="7" ry="3.5" transform="rotate(-45 176 108)" fill="#34d399" />
             <ellipse cx="187" cy="90" rx="6.5" ry="3.2" transform="rotate(-60 187 90)" fill="#10b981" />
             
-            <!-- Right Branch -->
             <path d="M332 150 C335 125 326 100 310 85" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" fill="none" />
             <ellipse cx="330" cy="130" rx="7" ry="3.5" transform="rotate(30 330 130)" fill="#34d399" />
             <ellipse cx="324" cy="108" rx="7" ry="3.5" transform="rotate(45 324 108)" fill="#34d399" />
             <ellipse cx="313" cy="90" rx="6.5" ry="3.2" transform="rotate(60 313 90)" fill="#10b981" />
 
-            <!-- Diplomatic Handshake / Connection Silhouette -->
+            <!-- Diplomatic Handshake / Bilateral Agreement -->
             <g transform="translate(225, 118)">
-              <!-- Left hand sleeve & hand -->
               <path d="M4 14 L17 14 L26 23 L20 28 L14 23 L4 23 Z" fill="#3b82f6" />
-              <!-- Right hand sleeve & hand -->
               <path d="M46 14 L33 14 L24 23 L30 28 L36 23 L46 23 Z" fill="#6366f1" />
-              <!-- Clasp connection knot -->
               <circle cx="25" cy="22" r="5" fill="#f59e0b" />
             </g>
 
-            <!-- Scales / Diplomatic Balance icon -->
+            <!-- Scales of Justice & Diplomacy -->
             <line x1="226" y1="162" x2="274" y2="162" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" />
             <path d="M250 154 L250 178" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" />
             <polygon points="220,172 232,172 226,162" fill="#f59e0b" />
             <polygon points="268,172 280,172 274,162" fill="#f59e0b" />
           </g>
 
-          <!-- Exit Door / Diplomatic Boundary Sign -->
+          <!-- Departure / Boundary Sign -->
           <g transform="translate(102, 108)" filter="url(#shadowFilter)">
             <rect x="0" y="0" width="38" height="66" rx="4" fill="#64748b" opacity="0.2" stroke="#94a3b8" stroke-width="1.8" />
             <line x1="0" y1="66" x2="42" y2="66" stroke="#64748b" stroke-width="2" stroke-linecap="round" />
-            <!-- Open doorway passage -->
             <polygon points="5,6 30,14 30,58 5,60" fill="#38bdf8" opacity="0.45" />
             <circle cx="24" cy="38" r="2" fill="#0284c7" />
-            <!-- Depart arrow -->
             <path d="M-8 33 L18 33 M12 26 L19 33 L12 40" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
           </g>
 
           <!-- Diplomatic Red Stamp "PERSONA NON GRATA" -->
           <g class="animated-stamp" filter="url(#shadowFilter)">
             <g transform="translate(260, 140) rotate(-11)">
-              <!-- Stamp double border badge -->
               <rect x="0" y="0" width="168" height="60" rx="8" fill="#fff" class="dark:fill-slate-900" fill-opacity="0.92" stroke="url(#stampGrad)" stroke-width="3" />
               <rect x="5" y="5" width="158" height="50" rx="5" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="5 3" />
               
-              <!-- Text inside Stamp -->
-              <text x="84" y="27" text-anchor="middle" font-family="'IBM Plex Sans', sans-serif" font-weight="700" font-size="11.5" fill="#dc2626" letter-spacing="1.5">PERSONA</text>
-              <text x="84" y="44" text-anchor="middle" font-family="'IBM Plex Sans', sans-serif" font-weight="700" font-size="11" fill="#991b1b" letter-spacing="1">NON GRATA</text>
+              <text x="84" y="27" text-anchor="middle" font-family="'Ubuntu', sans-serif" font-weight="700" font-size="11.5" fill="#dc2626" letter-spacing="1.5">PERSONA</text>
+              <text x="84" y="44" text-anchor="middle" font-family="'Ubuntu', sans-serif" font-weight="700" font-size="11" fill="#991b1b" letter-spacing="1">NON GRATA</text>
               
-              <!-- Tiny Stamp Star accents -->
               <polygon points="18,34 20,38 24,38 21,41 22,45 18,43 14,45 15,41 12,38 16,38" fill="#ef4444" />
               <polygon points="150,34 152,38 156,38 153,41 154,45 150,43 146,45 147,41 144,38 148,38" fill="#ef4444" />
             </g>
           </g>
         </svg>
       </div>
-
-      <!-- Main Heading formatted from document -->
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center text-slate-900 dark:text-white">
-        पर्सोना (नॉन) ग्राटा..
-      </h1>
     </div>
 
-    <article class="article-body text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-200 space-y-6">
+    <!-- Main Content Paragraphs -->
+    <article class="article-body text-slate-800 dark:text-slate-200">
       
       <p>
         समूहाने राहणे हा माणसाचा स्वभाव लक्षात घेता त्याची टोळ्या - वस्ती - खेडी – शहरे – राज्ये व देश अशी झालेली प्रगती नैसर्गिकच आहे. या व्यवस्थेत ‘आमच्या देशात आम्ही आणि तुमच्या भूमीवर तुम्ही राजे’ असे जरी अभिप्रेत असले तरी मनुष्यसमूहांचे एकामेकांशी संबंध येणे, त्यांची एकमेकांना गरज भासणे व प्रसंगी त्यांच्यात भांडणे होणे हे ओघाने आलेच. यातूनच पुढे एका राज्याचे दुसऱ्या राज्याशी असलेले संबंध सौहार्दपूर्ण असावेत म्हणून एकमेकांकडे राजदूत पाठवण्याची व्यवस्था विकसित होत गेली. महाभारतातील ‘कृष्णशिष्टाई’ सर्वांना ज्ञात आहेच.
@@ -292,8 +275,7 @@
         कोणताही देश कोणत्याही वेळी आणि कोणत्याही कारणाशिवाय एखाद्या राजनैतिक व्यक्तीला 'पर्सोना नॉन ग्राटा' घोषित करू शकतो. असे केल्यावर सदर व्यक्तीस ठराविक वेळेत तो देश सोडून जावेच लागते. थोडक्यात, ही राजनैतिक स्तरावर केलेली एक अपमानास्पद हकालपट्टी असते.
       </p>
 
-      <!-- Exact Centered Divider Symbol -->
-      <div class="text-center-exact text-lg sm:text-xl tracking-widest text-slate-400 dark:text-slate-500 select-none py-2 font-medium">
+      <div class="text-center-exact text-lg sm:text-xl tracking-widest text-slate-400 dark:text-slate-500 select-none">
         ◎◎◎
       </div>
 
@@ -317,19 +299,33 @@
         कोणताही यशस्वी ‘हायकमिशनर’ ज्याप्रमाणे आदर देऊन, आदब राखून व शिष्टसंमत वागून देशाचे परराष्ट्रसंबंध व स्वतःची कारकीर्द उत्तम ठेवत कायम ‘पर्सोना ग्राटा’च राहण्याला महत्व देतो; तद्वत, चांगल्या सवयी आणि मनाचिये ठायी कृतज्ञता असली की आपोआपच आपण लोकांच्या डोक्यात जात नाही व कायम ‘पर्सोना ग्राटा’ राहिल्याने आपले इतरांशी संबंध कायमच मित्रत्वाचे आणि सौहार्दपूर्ण राहण्यास मदत होते.
       </p>
 
-      <!-- Exact Centered Date/Ref line from document -->
-      <div class="text-center-exact text-sm sm:text-base text-slate-500 dark:text-slate-400 py-1 font-mono tracking-wider">
+      <div class="text-center-exact text-sm sm:text-base text-slate-500 dark:text-slate-400 font-mono tracking-wider">
         २०२५१२२२
       </div>
 
-      <!-- Exact Centered Closing Marker -->
-      <div class="text-center-exact text-lg sm:text-xl tracking-widest text-slate-400 dark:text-slate-500 select-none pb-6 font-medium">
+      <div class="text-center-exact text-lg sm:text-xl tracking-widest text-slate-400 dark:text-slate-500 select-none">
         ◎◎◎
+      </div>
+
+      <!-- Centered Share Button at bottom of page -->
+      <div class="flex justify-center items-center pt-4 pb-12">
+        <button 
+          id="shareBtn" 
+          type="button" 
+          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-base font-medium bg-slate-100 hover:bg-slate-200 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100 border border-slate-200 dark:border-slate-700 shadow-sm transition-all focus:outline-none"
+          aria-label="Share article"
+          title="शेअर करा">
+          <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 1 1 0-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 1 0 5.367-2.684 3 3 0 0 0-5.367 2.684zm0 9.316a3 3 0 1 0 5.368 2.684 3 3 0 0 0-5.368-2.684z"></path>
+          </svg>
+          <span class="tracking-wide">शेअर करा</span>
+        </button>
       </div>
 
     </article>
   </main>
 
+  <!-- Toast notification -->
   <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-slate-900 text-white dark:bg-white dark:text-slate-900 rounded-full text-sm font-medium shadow-lg transition-all duration-300 opacity-0 pointer-events-none z-50 flex items-center gap-2">
     <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
@@ -338,7 +334,7 @@
   </div>
 
   <script>
-    // Theme toggle handling
+    // Theme toggle logic
     const htmlEl = document.documentElement;
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const sunIcon = document.getElementById('sunIcon');
@@ -360,7 +356,6 @@
       }
     }
 
-    // Auto-detect system or stored preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     let isDarkMode = prefersDark;
     try {
@@ -404,7 +399,7 @@
           await navigator.share(shareData);
           return;
         } catch (err) {
-          if (err.name === 'AbortError') return; // User cancelled
+          if (err.name === 'AbortError') return;
         }
       }
 
